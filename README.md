@@ -49,7 +49,9 @@ res["reliability"]  # split-half r_sb for depth and auc
 Preregistration and reanalysis materials: https://osf.io/qnfth/
 Target journal: *SoftwareX*. Single-author. MIT licensed.
 
-This is an M1 scaffold: the recovery core (events, baseline, recovery, split-half
-reliability, permutation null, simulator) is implemented and tested; the Bayesian
-multilevel model, domain IO adapters, held-out gain, and the full ADEMP benchmark
-are ported next (see `pyproject` extras and module docstrings).
+Implemented and tested (M1–M2): the recovery core (events, baseline, recovery,
+split-half reliability, permutation null, simulator), the SLAM/HLR IO adapters
+(`io.from_slam`, `io.from_hlr`), the binomial multilevel model (`reliability.fit_mlm`,
+needs `[bayes]`), and held-out personalization gain (`heldout.heldout_gain`).
+Remaining (M3): the chess adapter and the full ADEMP simulation benchmark
+(`sim.run_ademp`). See module docstrings for the source-of-truth mapping.
