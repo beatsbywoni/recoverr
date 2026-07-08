@@ -1,6 +1,7 @@
 # recoverr
 
 [![tests](https://github.com/beatsbywoni/recoverr/actions/workflows/ci.yml/badge.svg)](https://github.com/beatsbywoni/recoverr/actions/workflows/ci.yml)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21264167.svg)](https://doi.org/10.5281/zenodo.21264167)
 
 Open pipeline for estimating **within-person recovery dynamics after failure** from
 behavioral telemetry — learning, memory, and performance logs — in one reusable API.

@@ -12,6 +12,7 @@ authors:
   - family-names: Jeong
     given-names: Hongwon
 version: 1.0.0
+doi: 10.5281/zenodo.21264167
 license: MIT
 repository-code: "https://github.com/beatsbywoni/recoverr"
 keywords:
