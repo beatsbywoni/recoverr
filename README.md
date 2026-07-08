@@ -49,9 +49,11 @@ res["reliability"]  # split-half r_sb for depth and auc
 Preregistration and reanalysis materials: https://osf.io/qnfth/
 Target journal: *SoftwareX*. Single-author. MIT licensed.
 
-Implemented and tested (M1–M2): the recovery core (events, baseline, recovery,
+Implemented and tested (M1–M3): the recovery core (events, baseline, recovery,
 split-half reliability, permutation null, simulator), the SLAM/HLR IO adapters
 (`io.from_slam`, `io.from_hlr`), the binomial multilevel model (`reliability.fit_mlm`,
-needs `[bayes]`), and held-out personalization gain (`heldout.heldout_gain`).
-Remaining (M3): the chess adapter and the full ADEMP simulation benchmark
-(`sim.run_ademp`). See module docstrings for the source-of-truth mapping.
+needs `[bayes]`), held-out personalization gain (`heldout.heldout_gain`), and the
+ADEMP benchmark (`sim.run_ademp`) that reproduces the regression-to-the-mean
+inflation of naive one-sided indices and its correction by placebo matching.
+See `examples/slam_quickstart.py` for a worked example on real SLAM data.
+Remaining (M4): the chess adapter and the HLR/chess vignettes.
