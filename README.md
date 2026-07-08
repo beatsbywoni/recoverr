@@ -27,9 +27,11 @@ Telemetry → events → baseline → recovery → reliability → heldout
 ## Install
 
 ```bash
-pip install recoverr           # light: numpy / pandas / scipy
-pip install "recoverr[bayes]"  # adds NumPyro + JAX for the multilevel model
+pip install recoverr-telemetry           # light: numpy / pandas / scipy / pyarrow
+pip install "recoverr-telemetry[bayes]"  # adds NumPyro + JAX for the multilevel model
 ```
+
+The distribution name is `recoverr-telemetry`; the import name is `recoverr` (e.g. `import recoverr as rc`).
 
 ## Quickstart
 

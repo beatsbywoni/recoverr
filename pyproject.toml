@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "recoverr"
+name = "recoverr-telemetry"
 version = "1.0.0"
 description = "Open pipeline for estimating within-person recovery dynamics after failure from behavioral telemetry (learning, memory, performance)."
 readme = "README.md"
