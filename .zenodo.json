@@ -1,0 +1,21 @@
+{
+  "title": "recoverr: A Python package for estimating within-person recovery dynamics from behavioral telemetry",
+  "description": "Open-source Python pipeline for estimating within-person recovery dynamics after failure from behavioral telemetry (learning, memory, performance): event detection, context-matched placebo baselines, parametric (decay time-constant) and nonparametric (area index) recovery estimation, split-half and multilevel reliability, permutation nulls, and held-out validation.",
+  "upload_type": "software",
+  "license": "MIT",
+  "version": "1.0.0",
+  "keywords": [
+    "recovery dynamics",
+    "behavioral telemetry",
+    "reliability",
+    "individual differences",
+    "learning analytics"
+  ],
+  "creators": [
+    {
+      "name": "Jeong, Hongwon",
+      "affiliation": "Center for Creative Convergence Education, Hanyang University ERICA",
+      "orcid": "0009-0003-7908-7478"
+    }
+  ]
+}
