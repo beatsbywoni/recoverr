@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use recoverr, please cite it."
+title: "recoverr: an open pipeline for within-person recovery dynamics from behavioral telemetry"
+abstract: >-
+  An open-source Python pipeline for estimating within-person recovery dynamics
+  after failure from behavioral telemetry (learning, memory, performance):
+  event detection, context-matched placebo baselines, parametric and
+  nonparametric recovery estimation, multilevel reliability, and held-out
+  validation.
+type: software
+authors:
+  - family-names: Jeong
+    given-names: Hongwon
+version: 0.4.0
+license: MIT
+repository-code: "https://github.com/beatsbywoni/recoverr"
+keywords:
+  - recovery dynamics
+  - within-person
+  - behavioral telemetry
+  - reliability
+  - learning analytics

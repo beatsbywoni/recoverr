@@ -93,9 +93,21 @@ def from_hlr(path, binarize: bool = False) -> Telemetry:
     return Telemetry.from_frame(df, unit="user", seq="ts", outcome=outcome, covariates=cov)
 
 
-def from_chess(path) -> Telemetry:  # pragma: no cover
-    """Online chess (performance). Map: unit=player, seq=move index, outcome=blunder.
+def from_chess(
+    path,
+    unit: str = "player",
+    seq: str = "ply",
+    outcome: str = "blunder",
+    covariates=(),
+) -> Telemetry:
+    """Online-chess move telemetry -> Telemetry (performance domain).
 
-    Use a time window disjoint from tilt studies #13/#16 (data de-dup).
+    Reads a ``.parquet`` or ``.csv`` table with a player id, a within-player move
+    order, and a binary failure indicator (e.g. blunder = eval drop beyond a
+    threshold). Column names are configurable via ``unit`` / ``seq`` / ``outcome``.
+    Use a time window disjoint from tilt studies #13/#16 for data de-dup.
     """
-    raise NotImplementedError("from_chess: implement chess adapter (data de-dup vs #13/#16).")
+    p = str(path)
+    df = pd.read_parquet(p) if p.endswith(".parquet") else pd.read_csv(p)
+    return Telemetry.from_frame(df, unit=unit, seq=seq, outcome=outcome,
+                                covariates=list(covariates))

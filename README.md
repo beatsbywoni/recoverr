@@ -1,5 +1,7 @@
 # recoverr
 
+[![tests](https://github.com/beatsbywoni/recoverr/actions/workflows/ci.yml/badge.svg)](https://github.com/beatsbywoni/recoverr/actions/workflows/ci.yml)
+
 Open pipeline for estimating **within-person recovery dynamics after failure** from
 behavioral telemetry — learning, memory, and performance logs — in one reusable API.
 
@@ -55,5 +57,7 @@ split-half reliability, permutation null, simulator), the SLAM/HLR IO adapters
 needs `[bayes]`), held-out personalization gain (`heldout.heldout_gain`), and the
 ADEMP benchmark (`sim.run_ademp`) that reproduces the regression-to-the-mean
 inflation of naive one-sided indices and its correction by placebo matching.
-See `examples/slam_quickstart.py` for a worked example on real SLAM data.
-Remaining (M4): the chess adapter and the HLR/chess vignettes.
+The three IO adapters (`from_slam`, `from_hlr`, `from_chess`), CI across Python
+3.10–3.12, and a citation file are in place. See `examples/slam_quickstart.py`
+for a worked example on real SLAM data.
+Remaining (M5+): HLR/chess worked examples, PyPI release, and a Zenodo DOI.

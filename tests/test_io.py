@@ -52,3 +52,19 @@ def test_from_hlr(tmp_path):
     assert tele.frame["outcome"].between(0, 1).all()
     tele_b = rio.from_hlr(p, binarize=True)
     assert tele_b.frame["outcome"].isin([0, 1]).all()
+
+
+def test_from_chess(tmp_path):
+    df = pd.DataFrame({
+        "player": ["p1", "p1", "p1", "p2", "p2"],
+        "ply": [1, 2, 3, 1, 2],
+        "blunder": [0, 1, 0, 1, 0],
+        "elo": [1500, 1500, 1500, 1800, 1800],
+    })
+    for ext, writer in [("parquet", df.to_parquet), ("csv", df.to_csv)]:
+        fp = tmp_path / f"chess.{ext}"
+        writer(fp, index=False) if ext == "csv" else writer(fp)
+        tele = rio.from_chess(fp, covariates=["elo"])
+        assert set(["unit", "seq", "outcome", "elo"]).issubset(tele.frame.columns)
+        assert tele.n_units == 2
+        assert tele.frame["outcome"].isin([0, 1]).all()
