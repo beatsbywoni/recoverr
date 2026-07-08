@@ -1,0 +1,43 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "recoverr"
+version = "0.1.0"
+description = "Open pipeline for estimating within-person recovery dynamics after failure from behavioral telemetry (learning, memory, performance)."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Hongwon Jeong" }]
+keywords = [
+    "recovery dynamics", "within-person", "behavioral telemetry",
+    "reliability", "learning analytics", "post-error",
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering",
+]
+dependencies = [
+    "numpy>=1.24",
+    "pandas>=2.0",
+    "scipy>=1.10",
+]
+
+[project.optional-dependencies]
+# Heavy Bayesian backend kept optional so `pip install recoverr` stays light
+# (matters for SoftwareX reviewers who install & run the package).
+bayes = ["numpyro>=0.13", "jax>=0.4"]
+dev = ["pytest>=7", "ruff>=0.1"]
+
+[project.urls]
+Homepage = "https://github.com/beatsbywoni/recoverr"
+Repository = "https://github.com/beatsbywoni/recoverr"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/recoverr"]
+
+[tool.ruff]
+line-length = 100
