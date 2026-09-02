@@ -112,7 +112,7 @@ Python 3.10–3.12 in CI. Contributions and issues: `CONTRIBUTING.md`.
 ## Citation
 
 Jeong H. recoverr: an open pipeline for within-person recovery dynamics from
-behavioral telemetry. Zenodo; 2026. https://doi.org/10.5281/zenodo.21264167
-(concept DOI; see `CITATION.cff` and `CHANGELOG.md` for versions).
+behavioral telemetry. Version 1.1.0. Zenodo; 2026. https://doi.org/10.5281/zenodo.22243328
+(concept DOI for all versions: https://doi.org/10.5281/zenodo.21264167; see `CITATION.cff`).
 
 Preregistration and reanalysis materials: https://osf.io/qnfth/. MIT licensed.
