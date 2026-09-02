@@ -1,0 +1,17 @@
+site_name: recoverr
+site_url: https://beatsbywoni.github.io/recoverr/
+repo_url: https://github.com/beatsbywoni/recoverr
+theme:
+  name: material
+nav:
+  - Home: index.md
+  - Methods: methods.md
+  - API reference: api.md
+  - Reproduce the examples: reproduce.md
+  - Benchmark: benchmark.md
+markdown_extensions:
+  - tables
+  - pymdownx.arithmatex:
+      generic: true
+extra_javascript:
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js

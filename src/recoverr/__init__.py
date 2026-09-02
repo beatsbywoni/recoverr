@@ -5,18 +5,18 @@ from . import baseline, events, heldout, io, nulls, recovery, reliability, sim
 from .pipeline import RecoveryPipeline
 from .schema import Telemetry
 
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 
 __all__ = [
-    "Telemetry",
     "RecoveryPipeline",
-    "events",
+    "Telemetry",
+    "__version__",
     "baseline",
+    "events",
+    "heldout",
+    "io",
+    "nulls",
     "recovery",
     "reliability",
-    "nulls",
-    "heldout",
     "sim",
-    "io",
-    "__version__",
 ]

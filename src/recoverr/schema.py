@@ -6,8 +6,8 @@ is what lets one pipeline serve all of them.
 """
 from __future__ import annotations
 
+from collections.abc import Sequence
 from dataclasses import dataclass
-from typing import Sequence
 
 import pandas as pd
 
@@ -39,7 +39,7 @@ class Telemetry:
         seq: str = "seq",
         outcome: str = "outcome",
         covariates: Sequence[str] = (),
-    ) -> "Telemetry":
+    ) -> Telemetry:
         covariates = tuple(covariates)
         missing = [c for c in (unit, seq, outcome, *covariates) if c not in df.columns]
         if missing:

@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "recoverr-telemetry"
-version = "1.0.0"
+version = "1.1.0"
 description = "Open pipeline for estimating within-person recovery dynamics after failure from behavioral telemetry (learning, memory, performance)."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -31,14 +31,26 @@ dependencies = [
 # Heavy Bayesian backend kept optional so `pip install recoverr` stays light
 # (matters for SoftwareX reviewers who install & run the package).
 bayes = ["numpyro>=0.13", "jax>=0.4"]
-dev = ["pytest>=7", "ruff>=0.1"]
+chess = ["zstandard>=0.21"]   # streaming .pgn.zst without the zstd CLI
+dev = ["pytest>=7", "pytest-cov>=4", "ruff>=0.1"]
+docs = ["mkdocs>=1.5", "mkdocs-material>=9"]
 
 [project.urls]
 Homepage = "https://github.com/beatsbywoni/recoverr"
 Repository = "https://github.com/beatsbywoni/recoverr"
+Changelog = "https://github.com/beatsbywoni/recoverr/blob/main/CHANGELOG.md"
+Issues = "https://github.com/beatsbywoni/recoverr/issues"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/recoverr"]
 
 [tool.ruff]
 line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B"]
+ignore = ["E501", "E702", "E731", "B905", "B023"]
+
+[tool.ruff.lint.per-file-ignores]
+"benchmarks/*" = ["F841"]
+"tests/*" = ["F841"]

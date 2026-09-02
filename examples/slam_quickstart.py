@@ -39,18 +39,28 @@ def main():
     tele = rio.from_slam(args.data, track=args.track, max_users=args.max_users)
     print(tele)
 
-    pipe = rc.RecoveryPipeline(window=20, depth_span=(1, 5))
+    # placebo anchors may not start inside a failed exercise (exclude_episode) and
+    # are matched on the learner's days-since-start bin and the exercise format
+    pipe = rc.RecoveryPipeline(window=20, depth_span=(1, 5), exclude_episode="ex_id",
+                               n_perm=1000, n_boot=500)
     res = pipe.run(tele, anchor_rule=error_cluster_rule(2),
                    match_on=["days_bin", "format"], min_events=10, seed=20260708)
 
-    print(f"\nevents detected: {res['n_events']:,}")
-    print("\nrecovery curve (event - placebo error rate):")
-    print(res["curve"].head(8).round(4).to_string(index=False))
+    print(f"\nevents detected: {res['n_events']:,} (non-overlapping: {res['n_events_thinned']:,};"
+          f" windows containing a later failure: {res['overlap_rate']:.1%} event / {res['overlap_rate_placebo']:.1%} placebo)")
+    print(f"balance: max |SMD| = {res['balance']['max_abs_smd']:.3f}, unmatched events = {res['balance']['events_unmatched']}")
+    print("\nrecovery curve (unit-weighted event - placebo error rate):")
+    print(res["curve"][["rel_pos", "event", "placebo", "deviation", "n_units"]].head(8).round(4).to_string(index=False))
+    f = res["fit"]
+    print(f"\nexponential fit: tau = {f['tau']:.1f} tokens, R2 = {f['r2']:.2f}, identified = {f['identified']}"
+          f" (per-learner tau unidentified: {res['tau_unidentified_rate']:.0%}; area index recommended when unidentified)")
+    p = res["permutation"]
+    print(f"permutation null: observed {p['obs']:.4f} vs null 97.5th pct {p['null_q975']:.4f} (p = {p['p_value']:.3g})")
     print("\nper-learner axes (describe):")
     print(res["axes"][["depth", "auc", "tau", "completeness", "level"]].describe().round(4))
-    print("\nsplit-half reliability (Spearman-Brown):")
+    print("\nsplit-half reliability (thinned odd/even, Spearman-Brown):")
     for axis, r in res["reliability"].items():
-        print(f"  {axis:10s} n={r['n_units']:4d}  r_sb={r['r_sb']}")
+        print(f"  {axis:10s} n={r['n_units']:4d}  r_sb={r['r_sb']:.3f}  95% CI [{r.get('ci_low', float('nan')):.2f}, {r.get('ci_high', float('nan')):.2f}]")
 
     if args.fig:
         import matplotlib

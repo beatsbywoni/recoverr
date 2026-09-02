@@ -25,10 +25,10 @@ def heldout_gain(
     a binary ``outcome`` (0/1) in ``ev_windows``.
     """
     order = (ev_windows[["unit", "event_id"]].drop_duplicates()
-             .assign(k=lambda d: d.groupby("unit").cumcount()))
+             .assign(k=lambda d: d.groupby("unit", observed=True).cumcount()))
     ev = ev_windows.merge(order, on=["unit", "event_id"])
     ev = ev[ev["rel_pos"].between(*span)].copy()
-    n_ev = (order.groupby("unit")["k"].max() + 1).rename("n_ev")
+    n_ev = (order.groupby("unit", observed=True)["k"].max() + 1).rename("n_ev")
     ev = ev.merge(n_ev, on="unit")
     is_test = ev["k"] >= ev["n_ev"] * (1 - tail_frac)
     tr, te = ev[~is_test], ev[is_test]
@@ -36,7 +36,7 @@ def heldout_gain(
         return {"n_test": 0}
 
     g = float(tr["outcome"].mean())  # global early-window failure rate
-    agg = tr.groupby("unit")["outcome"].agg(["mean", "size"])
+    agg = tr.groupby("unit", observed=True)["outcome"].agg(["mean", "size"])
     w = agg["size"] / (agg["size"] + shrink_k)  # shrink toward global
     p_user = (w * agg["mean"] + (1 - w) * g).rename("p_user")
     te = te.join(p_user, on="unit").dropna(subset=["p_user"])
@@ -53,7 +53,7 @@ def heldout_gain(
     ll_g, br_g = score(np.full(len(te), g))
     ll_u, br_u = score(te["p_user"].to_numpy())
     return {
-        "n_test": int(len(te)),
+        "n_test": len(te),
         "logloss_global": ll_g, "logloss_user": ll_u, "logloss_gain": ll_g - ll_u,
         "brier_global": br_g, "brier_user": br_u, "brier_gain": br_g - br_u,
     }

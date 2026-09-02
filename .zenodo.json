@@ -3,7 +3,7 @@
   "description": "Open-source Python pipeline for estimating within-person recovery dynamics after failure from behavioral telemetry (learning, memory, performance): event detection, context-matched placebo baselines, parametric (decay time-constant) and nonparametric (area index) recovery estimation, split-half and multilevel reliability, permutation nulls, and held-out validation.",
   "upload_type": "software",
   "license": "MIT",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "keywords": [
     "recovery dynamics",
     "behavioral telemetry",
