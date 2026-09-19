@@ -1,7 +1,7 @@
 # recoverr
 
 [![tests](https://github.com/beatsbywoni/recoverr/actions/workflows/ci.yml/badge.svg)](https://github.com/beatsbywoni/recoverr/actions/workflows/ci.yml)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21264167.svg)](https://doi.org/10.5281/zenodo.21264167)
+[![DOI (all versions)](https://zenodo.org/badge/DOI/10.5281/zenodo.21264167.svg)](https://doi.org/10.5281/zenodo.21264167)
 [![PyPI](https://img.shields.io/pypi/v/recoverr-telemetry.svg)](https://pypi.org/project/recoverr-telemetry/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
@@ -113,6 +113,10 @@ Python 3.10–3.12 in CI. Contributions and issues: `CONTRIBUTING.md`.
 
 Jeong H. recoverr: an open pipeline for within-person recovery dynamics from
 behavioral telemetry. Version 1.1.0. Zenodo; 2026. https://doi.org/10.5281/zenodo.22243328
-(concept DOI for all versions: https://doi.org/10.5281/zenodo.21264167; see `CITATION.cff`).
+
+- **Version DOI** (this release, v1.1.0): `10.5281/zenodo.22243328` — cite this to pin the exact code.
+- **Concept DOI** (all versions): `10.5281/zenodo.21264167` — resolves to the latest release.
+
+See `CITATION.cff` for machine-readable metadata and `CHANGELOG.md` for what changed between versions.
 
 Preregistration and reanalysis materials: https://osf.io/qnfth/. MIT licensed.

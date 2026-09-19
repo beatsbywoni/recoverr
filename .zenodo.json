@@ -17,5 +17,13 @@
       "affiliation": "Center for Creative Convergence Education, Hanyang University ERICA",
       "orcid": "0009-0003-7908-7478"
     }
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "10.5281/zenodo.21264167",
+      "relation": "isVersionOf",
+      "scheme": "doi",
+      "resource_type": "software"
+    }
   ]
 }
