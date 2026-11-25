@@ -57,6 +57,11 @@ res["reliability"]           # split-half r_SB (+ bootstrap CI) on non-overlappi
 Every stage is also a plain function (`rc.events`, `rc.baseline`, `rc.recovery`,
 `rc.reliability`, `rc.nulls`, `rc.heldout`), see `docs/api.md`.
 
+The usage example in the SoftwareX paper calls `anchor_rule=error_cluster_rule(2)`
+with `match_on=["days_bin", "format"]`. `error_cluster_rule` is not part of the
+package API; it is defined in `examples/slam_quickstart.py` (anchor = last token
+of an exercise with at least `min_errors` token errors).
+
 ## Design choices that matter
 
 - **Baseline** — for each failure, placebo anchors are non-failure moments of the
@@ -111,6 +116,14 @@ Python 3.10–3.12 in CI. Contributions and issues: `CONTRIBUTING.md`.
 
 ## Citation
 
+Please cite the SoftwareX article:
+
+Jeong H. recoverr: A Python package for estimating within-person recovery
+dynamics from behavioral telemetry. *SoftwareX* 36 (2026) 103056.
+https://doi.org/10.1016/j.softx.2026.103056
+
+To pin the exact code, also cite the software release:
+
 Jeong H. recoverr: an open pipeline for within-person recovery dynamics from
 behavioral telemetry. Version 1.1.0. Zenodo; 2026. https://doi.org/10.5281/zenodo.22243328
 
@@ -118,5 +131,17 @@ behavioral telemetry. Version 1.1.0. Zenodo; 2026. https://doi.org/10.5281/zenod
 - **Concept DOI** (all versions): `10.5281/zenodo.21264167` — resolves to the latest release.
 
 See `CITATION.cff` for machine-readable metadata and `CHANGELOG.md` for what changed between versions.
+
+### Notes on the paper
+
+The article describes v1.1.0. Defaults and specifications that the article does
+not state (window length, placebos per anchor, covariate bins, the multilevel
+model, the held-out shrinkage, the Lichess failure definition, dependency
+versions) are listed in section 7 of `docs/methods.md`.
+
+*Erratum.* Section 3.1 of the article says the package is "organized as seven
+modules"; it has nine (`schema`, `events`, `baseline`, `recovery`,
+`reliability`, `nulls`, `heldout`, `sim`, `io`), plus the `RecoveryPipeline`
+orchestrator.
 
 Preregistration and reanalysis materials: https://osf.io/qnfth/. MIT licensed.

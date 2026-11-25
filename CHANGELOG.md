@@ -3,6 +3,21 @@
 All notable changes to `recoverr` are documented here. The project follows
 [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+Documentation only; the code is unchanged from v1.1.0.
+
+### Documentation
+- Cite the published SoftwareX article (doi:10.1016/j.softx.2026.103056):
+  `preferred-citation` and author ORCID in `CITATION.cff`, citation section in
+  the README and `docs/index.md`.
+- `docs/methods.md` section 7 lists defaults and specifications that the
+  article does not state (window length, placebos per anchor, covariate bins,
+  multilevel model, held-out shrinkage, the usage example's anchor rule, the
+  Lichess failure definition, dependency versions).
+- Erratum for the article: Section 3.1 says "seven modules"; the package has
+  nine.
+
 ## [1.1.0] — 2026-09-02
 
 Revision release prepared in response to peer review. Three defaults changed
