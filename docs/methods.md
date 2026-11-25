@@ -101,3 +101,24 @@ deviation includes that persistence (quantified in `sim.run_ademp_null`).
 Reliability of individual differences rises with the number of non-overlapping
 episodes per unit (simulated curves in the paper) and should be reported with
 its CI and the split used.
+
+## 7. Details not stated in the paper
+
+The SoftwareX article (Jeong, 2026, https://doi.org/10.1016/j.softx.2026.103056)
+describes v1.1.0 but does not give the items below. Values are the v1.1.0 code
+defaults unless stated otherwise.
+
+| Topic | v1.1.0 behaviour | Code |
+|---|---|---|
+| Window length $W$ | `window=20` | `RecoveryPipeline` |
+| Early and late spans | depth over `depth_span=(1, 5)`; completeness over the last five positions of the window (`complete_span=None`) | `RecoveryPipeline`, `recovery.recovery_axes` |
+| Placebos per anchor $m$ | `n_per_event=3`; the SLAM, HLR and Lichess example scripts all use this default | `RecoveryPipeline`, `baseline.match_placebo` |
+| Anchor-defining span | `exclude_before=0` and `exclude_episode=None` by default; the examples bar the anchor's own episode with `exclude_episode` (SLAM `"ex_id"`, HLR `"session"`) and the Lichess example follows the game with `stream="game_id"` | `baseline.match_placebo` |
+| Covariate matching | exact on the values of the `match_on` columns; observations with a missing value are not used as placebos; continuous covariates must be binned beforehand. Bins built by the adapters: SLAM `days_bin` (edges 0, 7, 14, 30 days); HLR `hist_seen_bin` (1–3, 4–9, 10–29, 30+ prior exposures) and `lex_diff_bin` (quartiles of the lexeme's corpus-wide miss rate); Lichess `phase` (opening up to move 10, middlegame, endgame after move 30) and `wp_before_bin` / `wp_after_bin` (win probability 0–.25, .25–.5, .5–.75, .75–1) | `io.from_slam`, `io.from_hlr`, `io.from_lichess_moves` |
+| Matching on recent failure rate | used only in the simulation in the paper, but available to users: add a binned covariate with `sim.recent_rate_bins` and pass it in `match_on` | `sim.recent_rate_bins` |
+| Multilevel model | logit P(y = 1) = b0 + u_i + event × (b_ev + v_i); b0, b_ev ~ Normal(0, 2); random-effect SDs ~ HalfNormal(1); non-centred random effects; NUTS (target acceptance .95), 2 chains of 1000 warm-up and 1000 draws; R-hat reported. Not evaluated in the paper's benchmarks | `reliability.fit_mlm` (`[bayes]` extra) |
+| Held-out shrinkage | per-unit early-window rate shrunk toward the global rate with weight n_i / (n_i + 8), n_i = the unit's early-window observations in the training part (`shrink_k=8`) | `heldout.heldout_gain` |
+| Anchor rule of the usage example | `error_cluster_rule(k)`: last token of an exercise with at least k token errors (k = 2 in the SLAM example, 1 to 3 in the sensitivity analysis); defined in `examples/slam_quickstart.py`, not in the package | `examples/slam_quickstart.py` |
+| Lichess failure and outcome | anchor = blunder (Lichess annotation `??`, or a win-probability loss of at least .30 when annotations are absent); outcome = mistake or blunder (`?` or `??`, or a loss of at least `error_threshold=0.10`); win probability = 1 / (1 + exp(−0.00368208 × cp)) with centipawns clipped to ±1000 | `io.from_lichess_moves`, `io._win_prob` |
+| Dependencies | `numpy>=1.24`, `pandas>=2.0`, `scipy>=1.10`, `pyarrow>=14` (Parquet input in the adapters); optional extras `bayes` (`numpyro>=0.13`, `jax>=0.4`, multilevel model) and `chess` (`zstandard>=0.21`, streaming `.pgn.zst` files) | `pyproject.toml` |
+| Module count | the article says "seven modules"; the package has nine: `schema`, `events`, `baseline`, `recovery`, `reliability`, `nulls`, `heldout`, `sim`, `io`, plus the `RecoveryPipeline` orchestrator | `src/recoverr/` |
